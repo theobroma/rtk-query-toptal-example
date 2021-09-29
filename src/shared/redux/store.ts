@@ -11,6 +11,7 @@ import {
   REHYDRATE,
 } from "redux-persist";
 import { AUTH_API_REDUCER_KEY, authApi } from "../../api/auth/api";
+import { USER_API_REDUCER_KEY, userApi } from "../../api/github/user/api";
 import { authSlice, authReducer } from "../../features/auth/slice";
 import { RESET_STATE_ACTION_TYPE } from "./actions/resetState";
 import { unauthenticatedMiddleware } from "./middleware/unauthenticatedMiddleware";
@@ -18,6 +19,7 @@ import { unauthenticatedMiddleware } from "./middleware/unauthenticatedMiddlewar
 const reducers = {
   [authSlice.name]: authReducer,
   [AUTH_API_REDUCER_KEY]: authApi.reducer,
+  [USER_API_REDUCER_KEY]: userApi.reducer,
 };
 
 const combinedReducer = combineReducers<typeof reducers>(reducers);
@@ -37,7 +39,11 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat([unauthenticatedMiddleware, authApi.middleware]),
+    }).concat([
+      unauthenticatedMiddleware,
+      authApi.middleware,
+      userApi.middleware,
+    ]),
 });
 
 export const persistor = persistStore(store);

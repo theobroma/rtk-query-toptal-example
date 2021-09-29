@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
 import { QueryParamProvider } from "use-query-params";
+import UserMiddleware from "./api/auth/components/UserMiddleware/UserMiddleware";
 import Auth from "./features/auth/Auth";
 import "./index.css";
 import FullscreenProgress from "./shared/components/FullscreenProgress/FullscreenProgress";
@@ -16,7 +17,9 @@ const App = () => {
         <Router>
           <QueryParamProvider ReactRouterRoute={Route}>
             <CssBaseline />
-            <Auth />
+            <UserMiddleware>
+              <Auth />
+            </UserMiddleware>
           </QueryParamProvider>
         </Router>
       </PersistGate>
