@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { QueryParamProvider } from "use-query-params";
 import UserMiddleware from "./api/auth/components/UserMiddleware/UserMiddleware";
 import Auth from "./features/auth/Auth";
+import Dashboard from "./features/dashboard/Dashboard";
 import "./index.css";
 import FullscreenProgress from "./shared/components/FullscreenProgress/FullscreenProgress";
 import { persistor, store } from "./shared/redux/store";
@@ -19,6 +20,7 @@ const App = () => {
             <CssBaseline />
             <UserMiddleware>
               <Auth />
+              <Dashboard />
             </UserMiddleware>
           </QueryParamProvider>
         </Router>
