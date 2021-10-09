@@ -8,12 +8,17 @@ import FullscreenProgress from "../../../../shared/components/FullscreenProgress
 const RepositoriesRoute = React.lazy(
   () => import("./routes/Repositories/Repositories")
 );
+const CommitsRoute = React.lazy(() => import("./routes/Commits/Commits"));
+
 const Repositories = () => {
   return (
     <Suspense fallback={<FullscreenProgress />}>
       <Switch>
         <AuthenticatedRoute exact path="/repositories">
           <RepositoriesRoute />
+        </AuthenticatedRoute>
+        <AuthenticatedRoute exact path="/repositories/:repositoryName">
+          <CommitsRoute />
         </AuthenticatedRoute>
       </Switch>
     </Suspense>
